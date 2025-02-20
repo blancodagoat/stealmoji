@@ -32,8 +32,9 @@ export function showAddToServerActionSheet(emojiNode: EmojiNode) {
 // The sheet itself
 function AddToServer({ emojiNode }: { emojiNode: EmojiNode }) {
     // Get guilds as a Array of ID and value pairs, and filter out guilds the user can't edit emojis in
+    // Using updated permission constant for Discord's latest version
     const guilds = Object.values(GuildStore.getGuilds()).filter((guild) =>
-        PermissionsStore.can(constants.Permissions.MANAGE_GUILD_EXPRESSIONS, guild)
+        PermissionsStore.can(constants.Permissions.MANAGE_EMOJIS_AND_STICKERS || constants.Permissions.MANAGE_GUILD_EXPRESSIONS, guild)
     );
 
     return (
